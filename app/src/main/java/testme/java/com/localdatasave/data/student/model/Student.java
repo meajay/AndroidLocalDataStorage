@@ -1,4 +1,4 @@
-package testme.java.com.localdatasave.data.model;
+package testme.java.com.localdatasave.data.student.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,15 +9,26 @@ import android.os.Parcelable;
 
 public class Student implements Parcelable {
     private String name;
-    private  byte current_class ;
-    private int roll_no ;
-    private boolean sex ;
+    private int current_class;
+    private int roll_no;
+    private boolean sex;
 
-    protected Student(Parcel in) {
+    public Student(Parcel in) {
         name = in.readString();
         current_class = in.readByte();
         roll_no = in.readInt();
         sex = in.readByte() != 0;
+    }
+
+    public Student(String name, int current_class, int roll_no, boolean sex) {
+        this.name = name;
+        this.current_class = current_class;
+        this.roll_no = roll_no;
+        this.sex = sex;
+    }
+
+    public Student() {
+
     }
 
     public static final Creator<Student> CREATOR = new Creator<Student>() {
@@ -40,11 +51,11 @@ public class Student implements Parcelable {
         this.name = name;
     }
 
-    public byte getCurrent_class() {
+    public int getCurrent_class() {
         return current_class;
     }
 
-    public void setCurrent_class(byte current_class) {
+    public void setCurrent_class(int current_class) {
         this.current_class = current_class;
     }
 
@@ -72,7 +83,7 @@ public class Student implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeByte(current_class);
+        dest.writeInt(current_class);
         dest.writeInt(roll_no);
         dest.writeByte((byte) (sex ? 1 : 0));
     }
